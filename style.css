@@ -8,3 +8,22 @@ header{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:32px;align-ite
 .experience-bullets{margin:12px 0 0;padding-left:18px;color:#59645d;font-size:13px;line-height:1.75}.experience-bullets li{padding-left:3px;margin-bottom:9px}.experience-bullets li::marker{color:#879889}#experience article+article{padding-top:24px;border-top:1px solid var(--line)}
 
 .experience-bullets strong{font-weight:600;color:var(--ink)}
+
+/* Jasper occupies only the spare desktop margin. */
+.jasper-companion{position:fixed;left:calc((100vw - 740px)/4 - 80px);bottom:54px;width:160px;text-align:center;color:#81917c;display:none}
+.jasper-companion svg{display:block;width:160px;height:auto;overflow:visible;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.jasper-body,.jasper-face{fill:#f0eddf}.jasper-ear,.jasper-tail{fill:#e6dfc8}.jasper-ground{stroke:#d8dfd2}.jasper-sprout{stroke:#8d9e7c}
+.jasper-caption{display:block;font:italic 12px Georgia,serif;margin-top:3px;color:var(--muted)}
+.jasper-toggle{background:none;border:0;padding:8px 6px;color:var(--muted);font-family:inherit;font-size:10px;line-height:1.5;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.jasper-toggle:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+@media(min-width:1120px){.jasper-companion{display:block}}
+@media(prefers-reduced-motion:no-preference){
+.jasper-tail{transform-origin:126px 72px;animation:jasper-wag 1.8s ease-in-out infinite}
+.jasper-head{transform-origin:60px 81px;animation:jasper-sniff 8s ease-in-out infinite}
+.jasper-sniff{animation:jasper-breath 8s ease-in-out infinite}
+}
+.jasper-companion.is-paused *{animation-play-state:paused}
+@keyframes jasper-wag{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(12deg)}}
+@keyframes jasper-sniff{0%,35%,75%,100%{transform:rotate(0)}45%,65%{transform:rotate(-12deg) translateY(3px)}55%{transform:rotate(-9deg) translateY(2px)}}
+@keyframes jasper-breath{0%,38%,73%,100%{opacity:0}46%,60%{opacity:.7}53%,67%{opacity:.15}}
+@media(prefers-reduced-motion:reduce){.jasper-toggle{display:none}.jasper-sniff{opacity:0}}
