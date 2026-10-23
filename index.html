@@ -118,30 +118,41 @@
 @keyframes jasper-step{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-2px) rotate(1deg)}}
 @keyframes jasper-cleanup{0%,85%{opacity:1}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.jasper-companion *,.jasper-poop{animation:none!important}}
+
+.jasper-caption{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.jasper-feed{touch-action:none;cursor:grab!important;user-select:none}
+.jasper-companion.is-dragging .jasper-feed{cursor:grabbing!important}
+.jasper-companion.is-dragging .jasper-dog{animation:none!important}
+.jasper-toggle{opacity:0;width:22px;height:22px;border-radius:50%!important;text-decoration:none!important;background:#f0f2e9!important;font-size:10px!important}
+.jasper-companion:hover .jasper-toggle,.jasper-companion:focus-within .jasper-toggle{opacity:1}
 </style>
 <aside style="display:none;position:fixed;left:0;top:0;width:110px;text-align:center;color:#81917c;z-index:5" class="jasper-companion" aria-label="Jasper, my golden retriever">
-  <button class="jasper-feed" type="button" aria-label="Give Jasper a treat" title="Give Jasper a treat" style="display:block;border:0;padding:0;background:transparent;color:inherit;cursor:pointer">
+  <button class="jasper-feed" type="button" aria-label="Jasper: click for a treat, or drag to move" title="Drag me, or click for a treat" style="display:block;border:0;padding:0;background:transparent;color:inherit;cursor:pointer">
   <svg width="110" height="80" style="display:block;width:110px;height:80px;overflow:hidden" stroke="#81917c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <g class="jasper-treat" opacity="0"><path fill="#bc9564" stroke="#9e7b50" d="M20 91C16 87 12 91 15 94C11 97 15 101 19 97L27 101C29 105 34 102 31 98C35 94 31 91 28 95Z"/></g>
     <g class="jasper-heart" opacity="0"><path fill="#b67e6d" stroke="none" d="M83 32C67 23 78 12 83 20C89 12 100 23 83 32Z"/></g>
 
     <g class="jasper-dog">
-      <path fill="#e6dfc8" class="jasper-tail" d="M125 74C145 72 151 49 142 42C144 57 133 58 125 61"/>
-      <path fill="#f0eddf" class="jasper-body" d="M61 67C77 59 104 58 119 66C131 72 134 87 127 99L129 110H113L109 91C96 96 81 96 70 91L65 110H50L53 88"/>
-      <path d="M118 87L116 110M76 91L73 110"/>
+      <path class="jasper-tail" fill="#eedfbc" d="M124 75C137 72 145 57 143 45C151 55 150 69 142 77L138 78L140 81L133 82L134 85L124 86"/>
+      <path class="jasper-body" fill="#f7ecd2" d="M57 66C72 61 95 60 114 66C130 70 136 81 130 95L128 108Q129 113 122 113H114L112 96Q94 102 76 96L72 109Q72 113 66 113H57L60 94L55 86Z"/>
+      <path fill="#eddfbf" d="M110 91L108 108Q107 112 112 112H117M76 93L79 107Q80 111 75 111H71"/>
+      <path d="M116 110V112M121 110V112M60 110V112M65 110V112" stroke="#a59571" stroke-width="1.2"/>
       <g class="jasper-head">
-        <path fill="#f0eddf" class="jasper-face" d="M66 76C73 62 69 45 56 43C45 41 39 49 35 60L22 65C19 72 26 80 37 80L49 91L61 85"/>
-        <path fill="#e6dfc8" class="jasper-ear" d="M57 49C70 47 72 65 65 76C60 83 51 78 51 72L50 56"/>
-        <path d="M25 74C30 76 35 76 38 73"/>
-        <circle cx="41" cy="59" r="2" fill="currentColor" stroke="none"/>
-        <path d="M22 65L29 65L25 70Z" fill="currentColor" stroke="none"/>
+        <path class="jasper-face" fill="#f7ecd2" d="M64 87L58 94L56 90L51 93L50 87C42 85 37 80 36 75L23 74Q15 71 17 65L31 61C32 47 40 38 52 38C66 38 74 49 72 62L68 76L70 83L65 82Z"/>
+        <path class="jasper-ear" fill="#e8d5aa" d="M56 43C66 41 72 50 68 64L65 73Q60 81 53 75Q48 72 50 65L52 48"/>
+        <path d="M22 72Q29 79 38 73" stroke="#8b947c" stroke-width="1.3"/>
+        <path d="M31 76Q33 83 37 78L38 74" fill="#d4a29a" stroke="#b78b80" stroke-width="1"/>
+        <ellipse cx="38" cy="57" rx="1.9" ry="2.3" fill="#53624b" stroke="none"/>
+        <circle cx="37.4" cy="56.3" r=".55" fill="#fff" stroke="none"/>
+        <path d="M18 65Q22 63 25 65L22 69Q18 70 18 65Z" fill="#53624b" stroke="none"/>
+        <path d="M37 51Q40 49 42 51M46 83L49 80" stroke="#b9b392" stroke-width="1.2"/>
       </g>
     </g>
     <g class="jasper-sniff"><path d="M10 80L15 78M9 89H14M13 98L17 96"/></g>
   </svg>
   </button>
   <span style="display:block;font:italic 12px Georgia,serif;color:#717973" class="jasper-caption" role="status">Jasper, exploring.</span>
-  <button style="background:none;border:0;padding:8px;color:#717973;font:10px sans-serif;text-decoration:underline;cursor:pointer" class="jasper-toggle" type="button" aria-pressed="false">Pause Jasper</button>
+  <button style="background:none;border:0;padding:8px;color:#717973;font:10px sans-serif;text-decoration:underline;cursor:pointer" class="jasper-toggle" type="button" aria-pressed="false" aria-label="Pause Jasper" title="Pause Jasper">Ⅱ</button>
 </aside>
 <script>
 (() => {
@@ -157,6 +168,7 @@
  let nextPoop = 16000 + Math.random() * 12000;
  let activeTime = 0, paused = false, hovering = false, focused = false, facingRight = true;
  let reactionTimer;
+ let dragging = false, moved = false, dragStartX = 0, dragStartY = 0, offsetX = 0, offsetY = 0;
  const droppings = new Set();
  function bounds() {
   return {right: Math.max(12, innerWidth - 122), bottom: Math.max(12, innerHeight - 138)};
@@ -169,7 +181,7 @@
   svg.style.transform = facingRight ? 'scaleX(-1)' : 'scaleX(1)';
  }
  function visible() { return wide.matches; }
- function canMove() { return visible() && !reduced.matches && !paused && !hovering && !focused && !document.hidden; }
+ function canMove() { return visible() && !reduced.matches && !paused && !hovering && !focused && !dragging && !document.hidden; }
  function clearReaction() {
   clearTimeout(reactionTimer);
   dog.classList.remove('is-fed', 'is-pooping');
@@ -234,7 +246,35 @@
   paint();
   frame = requestAnimationFrame(tick);
  }
- feed.addEventListener('click', giveTreat);
+ feed.addEventListener('pointerdown', event => {
+  if (event.button !== 0) return;
+  dragging = true; moved = false;
+  dragStartX = event.clientX; dragStartY = event.clientY;
+  offsetX = event.clientX - x; offsetY = event.clientY - y;
+  feed.setPointerCapture(event.pointerId);
+  dog.classList.add('is-dragging');
+ });
+ feed.addEventListener('pointermove', event => {
+  if (!dragging) return;
+  if (Math.hypot(event.clientX - dragStartX, event.clientY - dragStartY) > 4) moved = true;
+  if (!moved) return;
+  x = event.clientX - offsetX; y = event.clientY - offsetY;
+  paint();
+ });
+ function releaseDrag(event) {
+  if (!dragging) return;
+  dragging = false;
+  dog.classList.remove('is-dragging');
+  if (feed.hasPointerCapture(event.pointerId)) feed.releasePointerCapture(event.pointerId);
+  if (moved) { hovering = false; focused = false; feed.blur(); }
+ }
+ feed.addEventListener('pointerup', releaseDrag);
+ feed.addEventListener('pointercancel', releaseDrag);
+ feed.addEventListener('lostpointercapture', () => { dragging = false; dog.classList.remove('is-dragging'); });
+ feed.addEventListener('click', () => {
+  if (moved) { moved = false; return; }
+  giveTreat();
+ });
  document.querySelectorAll('.tabs a').forEach(tab => tab.addEventListener('click', giveTreat));
  toggle.addEventListener('click', () => {
   paused = !paused;
@@ -242,7 +282,9 @@
   clearReaction(); busyUntil = activeTime;
   caption.textContent = paused ? 'Jasper, taking a break.' : 'Jasper, exploring.';
   toggle.setAttribute('aria-pressed', String(paused));
-  toggle.textContent = paused ? 'Resume Jasper' : 'Pause Jasper';
+  toggle.textContent = paused ? '▷' : 'Ⅱ';
+  toggle.setAttribute('aria-label', paused ? 'Resume Jasper' : 'Pause Jasper');
+  toggle.title = paused ? 'Resume Jasper' : 'Pause Jasper';
  });
  dog.addEventListener('pointerenter', () => { hovering = true; });
  dog.addEventListener('pointerleave', () => { hovering = false; });
