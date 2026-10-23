@@ -88,14 +88,31 @@
 .jasper-sniff{animation:jasper-breath 8s ease-in-out infinite}
 }
 .jasper-companion.is-paused *{animation-play-state:paused}
-.jasper-toggle:focus-visible{outline:2px solid #396650;outline-offset:2px}
+.jasper-feed:focus-visible,.jasper-toggle:focus-visible{outline:2px solid #396650;outline-offset:2px}
 @keyframes jasper-wag{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(12deg)}}
 @keyframes jasper-sniff{0%,35%,75%,100%{transform:rotate(0)}45%,65%{transform:rotate(-12deg) translateY(3px)}55%{transform:rotate(-9deg) translateY(2px)}}
 @keyframes jasper-breath{0%,38%,73%,100%{opacity:0}46%,60%{opacity:.7}53%,67%{opacity:.15}}
 @media(prefers-reduced-motion:reduce){.jasper-toggle{display:none}}
+
+/* A treat drops near his nose, then Jasper dips down and wags. */
+@media(prefers-reduced-motion:no-preference){
+.jasper-companion.is-fed .jasper-treat{animation:jasper-treat-drop 2.8s ease-out both}
+.jasper-companion.is-fed .jasper-head{animation:jasper-nibble 2.8s ease-in-out both}
+.jasper-companion.is-fed .jasper-tail{animation:jasper-happy-wag .3s ease-in-out infinite}
+.jasper-companion.is-fed .jasper-heart{animation:jasper-love 2.8s ease-out both}
+.jasper-companion.is-fed .jasper-sniff{animation:none;opacity:0}
+}
+@keyframes jasper-treat-drop{0%{opacity:0;transform:translate(8px,-70px) rotate(-15deg)}8%{opacity:1}30%,55%{opacity:1;transform:translate(0,0) rotate(0)}65%,100%{opacity:0;transform:translate(0,0)}}
+@keyframes jasper-nibble{0%,25%,100%{transform:rotate(0)}45%,58%,70%{transform:rotate(-24deg) translateY(3px)}52%,64%{transform:rotate(-20deg) translateY(2px)}85%{transform:rotate(0)}}
+@keyframes jasper-happy-wag{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(18deg)}}
+@keyframes jasper-love{0%,65%{opacity:0;transform:translateY(7px)}78%{opacity:1}100%{opacity:0;transform:translateY(-9px)}}
+@media(prefers-reduced-motion:reduce){.jasper-companion.is-fed .jasper-heart{opacity:1}}
 </style>
 <aside style="display:none;position:fixed;left:max(16px,calc((100vw - 740px)/4 - 70px));bottom:36px;width:140px;text-align:center;color:#81917c;z-index:1" class="jasper-companion" aria-label="Jasper, my golden retriever">
+  <button class="jasper-feed" type="button" aria-label="Give Jasper a treat" title="Give Jasper a treat" style="display:block;border:0;padding:0;background:transparent;color:inherit;cursor:pointer">
   <svg width="140" height="102" style="display:block;width:140px;height:102px;overflow:hidden" stroke="#81917c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <g class="jasper-treat" opacity="0"><path fill="#bc9564" stroke="#9e7b50" d="M20 91C16 87 12 91 15 94C11 97 15 101 19 97L27 101C29 105 34 102 31 98C35 94 31 91 28 95Z"/></g>
+    <g class="jasper-heart" opacity="0"><path fill="#b67e6d" stroke="none" d="M83 32C67 23 78 12 83 20C89 12 100 23 83 32Z"/></g>
     <path class="jasper-ground" d="M20 114H160"/>
     <g class="jasper-dog">
       <path fill="#e6dfc8" class="jasper-tail" d="M125 74C145 72 151 49 142 42C144 57 133 58 125 61"/>
@@ -112,15 +129,36 @@
     <g class="jasper-sniff"><path d="M10 80L15 78M9 89H14M13 98L17 96"/></g>
     <path class="jasper-sprout" d="M30 114V103M30 109C23 109 23 103 23 103C29 103 30 107 30 109ZM30 106C30 100 36 99 36 99C37 104 33 107 30 106Z"/>
   </svg>
-  <span style="display:block;font:italic 12px Georgia,serif;color:#717973" class="jasper-caption">Jasper, exploring.</span>
+  </button>
+  <span style="display:block;font:italic 12px Georgia,serif;color:#717973" class="jasper-caption" role="status">Jasper, exploring.</span>
   <button style="background:none;border:0;padding:8px;color:#717973;font:10px sans-serif;text-decoration:underline;cursor:pointer" class="jasper-toggle" type="button" aria-pressed="false">Pause animation</button>
 </aside>
 <script>
 (() => {
  const companion = document.querySelector('.jasper-companion');
- const toggle = companion.querySelector('button');
+ const toggle = companion.querySelector('.jasper-toggle');
+ const caption = companion.querySelector('.jasper-caption');
+ let resetTimer;
+ function giveTreat() {
+  if (companion.classList.contains('is-paused') || getComputedStyle(companion).display === 'none') return;
+  clearTimeout(resetTimer);
+  companion.classList.remove('is-fed');
+  // Restart the short reaction when another tab is selected quickly.
+  void companion.offsetWidth;
+  companion.classList.add('is-fed');
+  caption.textContent = 'A treat for Jasper!';
+  resetTimer = setTimeout(() => {
+   companion.classList.remove('is-fed');
+   caption.textContent = 'Jasper, exploring.';
+  }, 2800);
+ }
+ companion.querySelector('.jasper-feed').addEventListener('click', giveTreat);
+ document.querySelectorAll('.tabs a').forEach(tab => tab.addEventListener('click', giveTreat));
  toggle.addEventListener('click', () => {
   const paused = companion.classList.toggle('is-paused');
+  clearTimeout(resetTimer);
+  companion.classList.remove('is-fed');
+  caption.textContent = paused ? 'Jasper, taking a break.' : 'Jasper, exploring.';
   toggle.setAttribute('aria-pressed', String(paused));
   toggle.textContent = paused ? 'Resume animation' : 'Pause animation';
  });
