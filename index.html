@@ -77,5 +77,54 @@
 <footer><span>Jessica (Yu-An) Hung</span><a href="mailto:jessica.hung0323@outlook.com">Let’s connect ↗</a></footer>
 </main>
 <script src="script.js?v=20261023-2"></script>
+<style>
+/* Self-contained sizing and motion prevent mismatched cached assets. */
+@media(min-width:1120px){.jasper-companion{display:block!important}}
+.jasper-ground{stroke:#d8dfd2}.jasper-sprout{stroke:#8d9e7c}
+.jasper-sniff{opacity:0}
+@media(prefers-reduced-motion:no-preference){
+.jasper-tail{transform-origin:126px 72px;animation:jasper-wag 1.8s ease-in-out infinite}
+.jasper-head{transform-origin:60px 81px;animation:jasper-sniff 8s ease-in-out infinite}
+.jasper-sniff{animation:jasper-breath 8s ease-in-out infinite}
+}
+.jasper-companion.is-paused *{animation-play-state:paused}
+.jasper-toggle:focus-visible{outline:2px solid #396650;outline-offset:2px}
+@keyframes jasper-wag{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(12deg)}}
+@keyframes jasper-sniff{0%,35%,75%,100%{transform:rotate(0)}45%,65%{transform:rotate(-12deg) translateY(3px)}55%{transform:rotate(-9deg) translateY(2px)}}
+@keyframes jasper-breath{0%,38%,73%,100%{opacity:0}46%,60%{opacity:.7}53%,67%{opacity:.15}}
+@media(prefers-reduced-motion:reduce){.jasper-toggle{display:none}}
+</style>
+<aside style="display:none;position:fixed;left:max(16px,calc((100vw - 740px)/4 - 70px));bottom:36px;width:140px;text-align:center;color:#81917c;z-index:1" class="jasper-companion" aria-label="Jasper, my golden retriever">
+  <svg width="140" height="102" style="display:block;width:140px;height:102px;overflow:hidden" stroke="#81917c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path class="jasper-ground" d="M20 114H160"/>
+    <g class="jasper-dog">
+      <path fill="#e6dfc8" class="jasper-tail" d="M125 74C145 72 151 49 142 42C144 57 133 58 125 61"/>
+      <path fill="#f0eddf" class="jasper-body" d="M61 67C77 59 104 58 119 66C131 72 134 87 127 99L129 110H113L109 91C96 96 81 96 70 91L65 110H50L53 88"/>
+      <path d="M118 87L116 110M76 91L73 110"/>
+      <g class="jasper-head">
+        <path fill="#f0eddf" class="jasper-face" d="M66 76C73 62 69 45 56 43C45 41 39 49 35 60L22 65C19 72 26 80 37 80L49 91L61 85"/>
+        <path fill="#e6dfc8" class="jasper-ear" d="M57 49C70 47 72 65 65 76C60 83 51 78 51 72L50 56"/>
+        <path d="M25 74C30 76 35 76 38 73"/>
+        <circle cx="41" cy="59" r="2" fill="currentColor" stroke="none"/>
+        <path d="M22 65L29 65L25 70Z" fill="currentColor" stroke="none"/>
+      </g>
+    </g>
+    <g class="jasper-sniff"><path d="M10 80L15 78M9 89H14M13 98L17 96"/></g>
+    <path class="jasper-sprout" d="M30 114V103M30 109C23 109 23 103 23 103C29 103 30 107 30 109ZM30 106C30 100 36 99 36 99C37 104 33 107 30 106Z"/>
+  </svg>
+  <span style="display:block;font:italic 12px Georgia,serif;color:#717973" class="jasper-caption">Jasper, exploring.</span>
+  <button style="background:none;border:0;padding:8px;color:#717973;font:10px sans-serif;text-decoration:underline;cursor:pointer" class="jasper-toggle" type="button" aria-pressed="false">Pause animation</button>
+</aside>
+<script>
+(() => {
+ const companion = document.querySelector('.jasper-companion');
+ const toggle = companion.querySelector('button');
+ toggle.addEventListener('click', () => {
+  const paused = companion.classList.toggle('is-paused');
+  toggle.setAttribute('aria-pressed', String(paused));
+  toggle.textContent = paused ? 'Resume animation' : 'Pause animation';
+ });
+})();
+</script>
 </body>
 </html>
