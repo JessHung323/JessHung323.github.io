@@ -39,11 +39,3 @@ for (const [index, tab] of tabs.entries()) {
 }
 window.addEventListener('hashchange', () => selectTab(location.hash));
 selectTab(location.hash);
-
-const jasper = document.querySelector('.jasper-companion');
-const motionToggle = document.querySelector('.jasper-toggle');
-motionToggle.addEventListener('click', () => {
-  const paused = jasper.classList.toggle('is-paused');
-  motionToggle.setAttribute('aria-pressed', String(paused));
-  motionToggle.textContent = paused ? 'Resume animation' : 'Pause animation';
-});
